@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lissy AI Solutions - Tavus Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .showcase-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .text-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+        }
+
+        .text-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .generate-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .video-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            max-width: 600px;
+            height: 338px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .video-placeholder video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid rgba(46, 204, 113, 0.5);
+        }
+
+        .status-error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.5);
+        }
+
+        .status-info {
+            background: rgba(52, 152, 219, 0.2);
+            border: 1px solid rgba(52, 152, 219, 0.5);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #4ecdc4;
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+            
+            .showcase-card {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Lissy AI Solutions</div>
+            <div class="tagline">Tavus AI Video Generation Showcase</div>
+        </div>
+
+        <div class="showcase-card">
+            <div class="input-section">
+                <label class="input-label">Enter text for AI video generation:</label>
+                <textarea 
+                    class="text-input" 
+                    placeholder="Type your message here... Example: 'Hello! Welcome to Lissy AI Solutions. We create AI-generated video content for businesses.'"
+                    id="textInput"></textarea>
+            </div>
+
+            <button class="generate-btn" id="generateBtn">
+                Generate AI Video
+            </button>
+
+            <div id="statusMessage" class="status-message" style="display: none;"></div>
+
+            <div class="video-section">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 48px; margin-bottom: 20px;">🎬</div>
+                        <div>Your generated video will appear here</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>How it works:</h3>
+                <ul>
+                    <li>Enter any text in the field above</li>
+                    <li>Click "Generate AI Video"</li>
+                    <li>Our AI creates a realistic video with an avatar speaking your text</li>
+                    <li>Video generation takes 1-2 minutes</li>
+                    <li>Perfect for marketing videos, tutorials, and presentations</li>
+                </ul>
+                <p><strong>Powered by Tavus AI</strong> - State-of-the-art video generation technology</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 Lissy AI Solutions | AI Video Agency | Tavus API Integration</p>
+            <p>This is a technical showcase. For production use, contact us at ai-office@maku-hanga.com</p>
+        </div>
+    </div>
+
+    <script>
+        const generateBtn = document.getElementById('generateBtn');
+        const textInput = document.getElementById('textInput');
+        const statusMessage = document.getElementById('statusMessage');
+        const videoPlaceholder = document.getElementById('videoPlaceholder');
+
+        // Example text for quick testing
+        const exampleText = "Hello! I'm Lizzy from Lissy AI Solutions. We create AI-generated video content for businesses. With Tavus, we can create realistic avatars that deliver your message authentically. Try our showcase!";
+        textInput.value = exampleText;
+
+        generateBtn.addEventListener('click', async () => {
+            const text = textInput.value.trim();
+            
+            if (!text) {
+                showStatus('Please enter some text', 'error');
+                return;
+            }
+
+            // Disable button and show loading
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<span class="loading"></span>Generating...';
+            
+            showStatus('Starting video generation...', 'info');
+
+            try {
+                const response = await fetch('/.netlify/functions/tavus', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to generate video');
+                }
+
+                showStatus('Video generation started successfully! Processing may take 1-2 minutes.', 'success');
+                
+                // In a real implementation, you would poll for video status
+                // and update the video player when ready
+                setTimeout(() => {
+                    videoPlaceholder.innerHTML = `
+                        <div style="text-align: center; padding: 40px;">
+                            <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
+                            <div>Video generated successfully!</div>
+                            <div style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
+                                Video ID: ${data.videoId || 'demo-123'}
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <button style="background: #4ecdc4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                                    Watch Demo Video
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                showStatus(`Error: ${error.message}`, 'error');
+            } finally {
+                // Re-enable button
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = 'Generate AI Video';
+            }
+        });
+
+        function showStatus(message, type = 'info') {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message status-${type}`;
+            statusMessage.style.display = 'block';
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Add some interactive effects
+        textInput.addEventListener('focus', () => {
+            textInput.style.borderColor = '#4ecdc4';
+        });
+
+        textInput.addEventListener('blur', () => {
+            textInput.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+        });
+    </script>
+</body>
+</html>

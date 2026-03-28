@@ -1,0 +1,26 @@
+{
+  "name": "tavus-showcase",
+  "version": "1.0.0",
+  "description": "Lissy AI Solutions - Tavus AI Video Generation Showcase",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step required'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "ai",
+    "video",
+    "tavus",
+    "netlify",
+    "showcase"
+  ],
+  "author": "Lissy AI Solutions",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^15.0.0"
+  }
+}
