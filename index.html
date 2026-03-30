@@ -31,6 +31,7 @@
             overflow: hidden;
             border-radius: 0 0 30px 30px;
             margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .hero-content {
@@ -92,11 +93,17 @@
             background: white;
             border-radius: 20px;
             padding: 3rem;
-            box-shadow: 0 20px 40px rgba(10, 36, 99, 0.1);
+            box-shadow: 0 25px 50px rgba(10, 36, 99, 0.15);
             border: 1px solid #e2e8f0;
             margin-bottom: 3rem;
             position: relative;
             top: -50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(10, 36, 99, 0.2);
         }
 
         .section-title {
@@ -163,13 +170,15 @@
         .btn-primary {
             background: linear-gradient(135deg, #0a2463 0%, #0D2F7A 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(10, 36, 99, 0.2);
+            box-shadow: 0 6px 20px rgba(10, 36, 99, 0.25);
+            border: 2px solid transparent;
         }
 
         .btn-primary:hover {
             background: linear-gradient(135deg, #071A47 0%, #0a2463 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(10, 36, 99, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(10, 36, 99, 0.35);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .btn-primary:disabled {
@@ -181,13 +190,15 @@
         .btn-secondary {
             background: linear-gradient(135deg, #ff7b00 0%, #ff9500 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 123, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(255, 123, 0, 0.25);
+            border: 2px solid transparent;
         }
 
         .btn-secondary:hover {
             background: linear-gradient(135deg, #cc6200 0%, #ff7b00 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 123, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 123, 0, 0.35);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .btn-center {
@@ -244,6 +255,41 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0a2463, #ff7b00);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Video Thumbnail */
+        .video-thumbnail {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto 2rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 3px solid white;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         /* Video Section */
@@ -618,13 +664,25 @@
             }
         });
 
-        function showStatus(message, type = 'info') {
-            statusMessage.textContent = message;
+        function showStatus(message, type = 'info', progress = null) {
+            statusMessage.innerHTML = '';
+            
+            if (progress !== null) {
+                const progressBar = document.createElement('div');
+                progressBar.className = 'progress-bar';
+                progressBar.innerHTML = `<div class="progress-fill" style="width: ${progress}%"></div>`;
+                statusMessage.appendChild(progressBar);
+            }
+            
+            const messageText = document.createElement('div');
+            messageText.textContent = message;
+            statusMessage.appendChild(messageText);
+            
             statusMessage.className = `status-message status-${type}`;
             statusMessage.style.display = 'block';
             
             // Erfolgsmeldungen nach 5 Sekunden automatisch ausblenden
-            if (type === 'success') {
+            if (type === 'success' && progress === null) {
                 setTimeout(() => {
                     statusMessage.style.display = 'none';
                 }, 5000);
@@ -636,18 +694,22 @@
             let attempts = 0;
             const maxAttempts = 30; // 30 attempts = 2.5 minutes (5 seconds each)
             
+            // Show initial status with progress
+            showStatus(`🎬 Video-Generierung gestartet... (0%)`, 'info', 0);
+            
             const pollInterval = setInterval(async () => {
                 attempts++;
+                const progress = Math.min(95, Math.floor((attempts / maxAttempts) * 100));
                 
                 try {
-                    showStatus(`⏳ Prüfe Video-Status... (${attempts}/${maxAttempts})`, 'info');
+                    showStatus(`⏳ Video wird generiert... (${progress}%)`, 'info', progress);
                     
                     const response = await fetch(`/.netlify/functions/video-status?videoId=${videoId}`);
                     const data = await response.json();
                     
                     if (data.status === 'completed') {
                         clearInterval(pollInterval);
-                        showStatus('✅ Video erfolgreich generiert! Lade Video...', 'success');
+                        showStatus('✅ Video erfolgreich generiert! Lade Video...', 'success', 100);
                         displayVideo(data.videoUrl, videoId);
                     } else if (data.status === 'failed') {
                         clearInterval(pollInterval);
@@ -655,12 +717,18 @@
                     } else if (attempts >= maxAttempts) {
                         clearInterval(pollInterval);
                         showStatus('⏰ Timeout: Video-Generierung dauert zu lange. Bitte später erneut versuchen.', 'warning');
+                    } else {
+                        // Show Tavus status if available
+                        const statusText = data.tavusStatus ? ` (${data.tavusStatus})` : '';
+                        showStatus(`⏳ Video wird generiert${statusText}... (${progress}%)`, 'info', progress);
                     }
                 } catch (error) {
                     console.error('Polling error:', error);
                     if (attempts >= maxAttempts) {
                         clearInterval(pollInterval);
                         showStatus('❌ Fehler beim Abrufen des Video-Status.', 'error');
+                    } else {
+                        showStatus(`⚠️ Verbindungsproblem... (${progress}%)`, 'warning', progress);
                     }
                 }
             }, 5000); // Poll every 5 seconds
@@ -671,32 +739,70 @@
             videoPlaceholder.classList.add('has-video');
             videoPlaceholder.innerHTML = `
                 <div style="width: 100%; max-width: 800px; margin: 0 auto;">
-                    <h3 style="margin-bottom: 1rem; color: #0a2463; font-family: 'Cormorant Garamond', serif;">✅ Video erfolgreich generiert!</h3>
-                    
-                    <div class="video-info">
-                        <strong>Video-ID:</strong> ${videoId}<br>
-                        <strong>Status:</strong> Fertig zum Ansehen & Download<br>
-                        <strong>Technologie:</strong> Tavus AI Avatar Generierung
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;">✅</div>
+                        <h3 style="color: #0a2463; font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 0.5rem;">
+                            Video erfolgreich generiert!
+                        </h3>
+                        <p style="color: #64748b;">Ihr KI-Video ist fertig zum Ansehen und Download</p>
                     </div>
                     
-                    <video controls style="width: 100%; border-radius: 10px; margin-bottom: 1.5rem;">
+                    <div class="video-thumbnail">
+                        <video poster="https://raw.githubusercontent.com/wore2706-lgtm/lizzy-marketing-automation/main/business/maku-hanga-website/img/avatars/lizzy_avatar.jpg" 
+                               style="width: 100%; height: auto; display: block;">
+                            <source src="${videoUrl}" type="video/mp4">
+                        </video>
+                    </div>
+                    
+                    <div class="video-info">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="background: rgba(10, 36, 99, 0.05); padding: 1rem; border-radius: 8px;">
+                                <strong style="color: #0a2463; display: block; margin-bottom: 0.5rem;">Video-ID</strong>
+                                <code style="background: rgba(10, 36, 99, 0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.9rem;">${videoId}</code>
+                            </div>
+                            <div style="background: rgba(10, 36, 99, 0.05); padding: 1rem; border-radius: 8px;">
+                                <strong style="color: #0a2463; display: block; margin-bottom: 0.5rem;">Status</strong>
+                                <span style="color: #10b981; font-weight: 600;">✅ Fertig</span>
+                            </div>
+                            <div style="background: rgba(10, 36, 99, 0.05); padding: 1rem; border-radius: 8px;">
+                                <strong style="color: #0a2463; display: block; margin-bottom: 0.5rem;">Technologie</strong>
+                                <span>Tavus AI Avatar</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <video controls style="width: 100%; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
                         <source src="${videoUrl}" type="video/mp4">
                         Ihr Browser unterstützt das Video-Tag nicht.
                     </video>
                     
                     <div class="video-controls">
                         <button onclick="window.open('${videoUrl}', '_blank')" class="btn btn-primary">
-                            Video herunterladen
+                            📥 Video herunterladen
                         </button>
                         <button onclick="location.reload()" class="btn" style="background: #f8fafc; color: #0a2463; border: 2px solid #0a2463;">
-                            Neues Video erstellen
+                            🎬 Neues Video erstellen
                         </button>
                         <button onclick="shareVideo('${videoId}')" class="btn btn-secondary">
-                            Video teilen
+                            📤 Video teilen
                         </button>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(10, 36, 99, 0.05) 0%, rgba(255, 123, 0, 0.05) 100%); border-radius: 12px; border-left: 4px solid #0a2463;">
+                        <h4 style="color: #0a2463; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif;">✨ Nächste Schritte</h4>
+                        <p style="color: #475569; margin-bottom: 0;">
+                            Möchten Sie diese Technologie für Ihr Unternehmen nutzen? Kontaktieren Sie uns für eine maßgeschneiderte KI-Video-Lösung.
+                        </p>
                     </div>
                 </div>
             `;
+            
+            // Auto-play the video (muted)
+            const videoElement = videoPlaceholder.querySelector('video');
+            if (videoElement) {
+                videoElement.muted = true;
+                videoElement.play().catch(e => console.log('Auto-play prevented:', e));
+            }
         }
 
         // Share function
