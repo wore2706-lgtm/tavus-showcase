@@ -7,7 +7,7 @@
 cd /home/digibus/.openclaw/workspace/tavus-showcase
 git init
 git add .
-git commit -m "Tavus Showcase für Lissy AI Solutions - Deutsche Version"
+git commit -m "Tavus Showcase für Lizzy AI Solutions - Deutsche Version"
 ```
 
 ### 2. Zu deinem GitHub Account pushen
@@ -73,6 +73,9 @@ tavus-showcase/
 - Frontend mit modernem Design **auf Deutsch**
 - Vollständige Deployment-Anleitung
 - Optimiert für DACH-Markt
+- Video-Status Polling implementiert
+- Echte Video-Anzeige mit Player
+- Namenskonsistenz: Lissy → Lizzy
 
 ⚠️ **Zu testen:**
 - Netlify Deployment (kostenlos)

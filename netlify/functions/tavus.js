@@ -25,10 +25,10 @@ export async function handler(event) {
         'x-api-key': process.env.TAVUS_API_KEY
       },
       body: JSON.stringify({
-        replica_id: 'rf4e9d9790f0', // Anna - Professional
-        script: text,
-        video_name: `Lissy AI Video - ${Date.now()}`,
-        background_url: 'https://lissyaisolutions.com' // Optional background
+      replica_id: 'rf4e9d9790f0', // Anna - Professional
+      script: text,
+      video_name: `Lizzy AI Video - ${Date.now()}`,
+      background_url: 'https://lizzyaisolutions.com' // Optional background
       })
     });
 

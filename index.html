@@ -223,7 +223,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">Lissy AI Solutions</div>
+            <div class="logo">Lizzy AI Solutions</div>
             <div class="tagline">Tavus KI-Video-Generierung Showcase</div>
         </div>
 
@@ -232,7 +232,7 @@
                 <label class="input-label">Text für KI-Video-Generierung eingeben:</label>
                 <textarea 
                     class="text-input" 
-                    placeholder="Geben Sie hier Ihren Text ein... Beispiel: 'Hallo! Willkommen bei Lissy AI Solutions. Wir erstellen KI-generierte Videoinhalte für Unternehmen.'"
+                    placeholder="Geben Sie hier Ihren Text ein... Beispiel: 'Hallo! Willkommen bei Lizzy AI Solutions. Wir erstellen KI-generierte Videoinhalte für Unternehmen.'"
                     id="textInput"></textarea>
             </div>
 
@@ -261,11 +261,14 @@
                     <li>Perfekt für Marketing-Videos, Tutorials und Präsentationen</li>
                 </ul>
                 <p><strong>Powered by Tavus AI</strong> - Modernste Video-Generierungstechnologie</p>
+                <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.8;">
+                    <strong>Hinweis:</strong> Video-Generierung dauert 1-2 Minuten. Nach erfolgreicher Generierung können Sie das Video direkt ansehen.
+                </p>
             </div>
         </div>
 
         <div class="footer">
-            <p>© 2026 Lissy AI Solutions | KI-Video-Agentur | Tavus API Integration</p>
+            <p>© 2026 Lizzy AI Solutions | KI-Video-Agentur | Tavus API Integration</p>
             <p>Dies ist ein technischer Showcase. Für Produktionsnutzung kontaktieren Sie uns unter ai-office@maku-hanga.com</p>
         </div>
     </div>
@@ -277,7 +280,7 @@
         const videoPlaceholder = document.getElementById('videoPlaceholder');
 
         // Beispieltext für schnelles Testen
-        const exampleText = "Hallo! Ich bin Lizzy von Lissy AI Solutions. Wir erstellen KI-generierte Videoinhalte für Unternehmen. Mit Tavus können wir realistische Avatare erstellen, die Ihre Botschaft authentisch vermitteln. Testen Sie unseren Showcase!";
+        const exampleText = "Hallo! Ich bin Lizzy von Lizzy AI Solutions. Wir erstellen KI-generierte Videoinhalte für Unternehmen. Mit Tavus können wir realistische Avatare erstellen, die Ihre Botschaft authentisch vermitteln. Testen Sie unseren Showcase!";
         textInput.value = exampleText;
 
         generateBtn.addEventListener('click', async () => {
@@ -311,24 +314,12 @@
 
                 showStatus('Video-Generierung erfolgreich gestartet! Die Verarbeitung kann 1-2 Minuten dauern.', 'success');
                 
-                // In a real implementation, you would poll for video status
-                // and update the video player when ready
-                setTimeout(() => {
-                    videoPlaceholder.innerHTML = `
-                        <div style="text-align: center; padding: 40px;">
-                            <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
-                            <div>Video erfolgreich generiert!</div>
-                            <div style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
-                                Video-ID: ${data.videoId || 'demo-123'}
-                            </div>
-                            <div style="margin-top: 20px;">
-                                <button style="background: #4ecdc4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                                    Demo-Video ansehen
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                }, 2000);
+                // Start polling for video status
+                if (data.videoId) {
+                    startVideoPolling(data.videoId);
+                } else {
+                    showStatus('Video-Generierung gestartet, aber keine Video-ID erhalten.', 'info');
+                }
 
             } catch (error) {
                 console.error('Fehler:', error);
@@ -351,6 +342,66 @@
                     statusMessage.style.display = 'none';
                 }, 5000);
             }
+        }
+
+        // Video status polling function
+        async function startVideoPolling(videoId) {
+            let attempts = 0;
+            const maxAttempts = 30; // 30 attempts = 2.5 minutes (5 seconds each)
+            
+            const pollInterval = setInterval(async () => {
+                attempts++;
+                
+                try {
+                    showStatus(`Prüfe Video-Status... (Versuch ${attempts}/${maxAttempts})`, 'info');
+                    
+                    const response = await fetch(`/.netlify/functions/video-status?videoId=${videoId}`);
+                    const data = await response.json();
+                    
+                    if (data.status === 'completed') {
+                        clearInterval(pollInterval);
+                        showStatus('Video erfolgreich generiert! Lade Video...', 'success');
+                        displayVideo(data.videoUrl, videoId);
+                    } else if (data.status === 'failed') {
+                        clearInterval(pollInterval);
+                        showStatus('Video-Generierung fehlgeschlagen.', 'error');
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(pollInterval);
+                        showStatus('Timeout: Video-Generierung dauert zu lange. Bitte später erneut versuchen.', 'info');
+                    }
+                } catch (error) {
+                    console.error('Polling error:', error);
+                    if (attempts >= maxAttempts) {
+                        clearInterval(pollInterval);
+                        showStatus('Fehler beim Abrufen des Video-Status.', 'error');
+                    }
+                }
+            }, 5000); // Poll every 5 seconds
+        }
+
+        // Display video when ready
+        function displayVideo(videoUrl, videoId) {
+            videoPlaceholder.innerHTML = `
+                <div style="width: 100%; max-width: 600px; margin: 0 auto;">
+                    <h3 style="margin-bottom: 15px; color: #4ecdc4;">✅ Video erfolgreich generiert!</h3>
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                        <strong>Video-ID:</strong> ${videoId}<br>
+                        <strong>Status:</strong> Fertig zum Ansehen
+                    </div>
+                    <video controls style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+                        <source src="${videoUrl}" type="video/mp4">
+                        Ihr Browser unterstützt das Video-Tag nicht.
+                    </video>
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <button onclick="window.open('${videoUrl}', '_blank')" style="background: #4ecdc4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                            Video in neuem Tab öffnen
+                        </button>
+                        <button onclick="location.reload()" style="background: rgba(255, 255, 255, 0.2); color: white; border: 1px solid rgba(255, 255, 255, 0.3); padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                            Neues Video erstellen
+                        </button>
+                    </div>
+                </div>
+            `;
         }
 
         // Add some interactive effects

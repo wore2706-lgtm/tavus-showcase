@@ -1,4 +1,4 @@
-# Tavus Showcase - Lissy AI Solutions
+# Tavus Showcase - Lizzy AI Solutions
 
 ## 🇩🇪 Deutsche Demo für DACH-Markt
 
@@ -6,7 +6,7 @@ Eine vollständig auf Deutsch lokalisierte Demo für Tavus KI-Video-Generierung,
 
 ## 🚀 Live Demo
 
-🔗 **https://tavus-showcase-lissy-ai.netlify.app**
+🔗 **https://tavus-showcase-lizzy-ai.netlify.app**
 
 ## 🎯 Funktionen
 
@@ -122,9 +122,9 @@ tavus-showcase/
 
 ## 📞 Kontakt & Support
 
-**Lissy AI Solutions:**
+**Lizzy AI Solutions:**
 - **Email:** ai-office@maku-hanga.com
-- **Website:** lissyaisolutions.com (in Planung)
+- **Website:** lizzyaisolutions.com (in Planung)
 - **Standort:** Klagenfurt, Österreich
 
 **Technischer Support:**
@@ -140,8 +140,8 @@ MIT License - Siehe [LICENSE](LICENSE) Datei für Details.
 
 - **Tavus.io** für die KI-Video-Generierung API
 - **Netlify** für das kostenlose Hosting
-- **Lissy AI Solutions** Team für die Konzeption
+- **Lizzy AI Solutions** Team für die Konzeption
 
 ---
 
-**🇩🇪 Made for DACH with ❤️ by Lissy AI Solutions**
+**🇩🇪 Made for DACH with ❤️ by Lizzy AI Solutions**
