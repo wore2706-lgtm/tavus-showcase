@@ -7,7 +7,7 @@
 cd /home/digibus/.openclaw/workspace/tavus-showcase
 git init
 git add .
-git commit -m "Tavus Showcase für Lissy AI Solutions"
+git commit -m "Tavus Showcase für Lissy AI Solutions - Deutsche Version"
 ```
 
 ### 2. Zu deinem GitHub Account pushen
@@ -24,6 +24,8 @@ git push -u origin main
 3. Wähle GitHub → `tavus-showcase`
 4. **Build settings sind automatisch konfiguriert**
 5. Klicke "Deploy site"
+
+**Hinweis:** Die Seite ist jetzt auf Deutsch für den DACH-Markt optimiert.
 
 ### 4. Tavus API Key setzen
 1. In Netlify: Site settings → Environment variables
@@ -43,7 +45,7 @@ git push -u origin main
 ```
 
 **Woher kommt der Key:**
-- Tavus Developer Account: `lizzy.aisolutions.test@gmail.com`
+- Tavus Developer Account: `ai-office@maku-hanga.com`
 - Free Tier: 5 Videos/Monat kostenlos
 - Für Produktion: Auf Business Plan upgraden
 
@@ -68,8 +70,9 @@ tavus-showcase/
 - API Key generiert: `0738c841f17242c38a958c66d444aea4`
 - Test-Video generiert (Anna Avatar)
 - Netlify Function implementiert
-- Frontend mit modernem Design
+- Frontend mit modernem Design **auf Deutsch**
 - Vollständige Deployment-Anleitung
+- Optimiert für DACH-Markt
 
 ⚠️ **Zu testen:**
 - Netlify Deployment (kostenlos)
@@ -84,8 +87,8 @@ tavus-showcase/
 - GitHub: Kostenloses Repository
 
 **Produktionskosten (später):**
-- Tavus Business: ~$99/Monat (unbegrenzte Videos)
-- Netlify Pro: ~$19/Monat (erweiterte Features)
+- Tavus Business: ~99€/Monat (unbegrenzte Videos)
+- Netlify Pro: ~19€/Monat (erweiterte Features)
 
 ## 🔄 Nächste Schritte
 
@@ -95,6 +98,8 @@ tavus-showcase/
 4. **Testen** (2 Minuten)
 
 **Gesamtzeit: ~8 Minuten**
+
+**Sprache:** Die Demo ist jetzt vollständig auf Deutsch für den DACH-Markt.
 
 ## 🛠️ Troubleshooting
 
@@ -119,7 +124,8 @@ Bei Problemen:
 **Ready to deploy!** 🚀
 
 Dein Tavus Showcase ist bereit für:
-- Kunden-Demos
-- Marketing-Präsentationen
+- Kunden-Demos im DACH-Markt
+- Marketing-Präsentationen auf Deutsch
 - Technische Proof-of-Concept
-- Live-Tests mit potenziellen Kunden
+- Live-Tests mit deutschsprachigen Kunden
+- Showcase für KI-Video-Agentur Dienstleistungen

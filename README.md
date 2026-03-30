@@ -1,117 +1,147 @@
-# Lissy AI Solutions - Tavus Showcase
+# Tavus Showcase - Lissy AI Solutions
 
-A live demo showcasing AI video generation using Tavus API with Netlify Functions.
+## 🇩🇪 Deutsche Demo für DACH-Markt
 
-## Features
+Eine vollständig auf Deutsch lokalisierte Demo für Tavus KI-Video-Generierung, optimiert für den deutschen, österreichischen und schweizerischen Markt.
 
-- **Real-time AI Video Generation**: Enter text, get AI-generated video
-- **Netlify Functions Backend**: Serverless API integration
-- **Modern UI**: Responsive design with gradient backgrounds
-- **Tavus API Integration**: Uses state-of-the-art video generation
-- **Zero Configuration**: Ready to deploy
+## 🚀 Live Demo
 
-## Setup & Deployment
+🔗 **https://tavus-showcase-lissy-ai.netlify.app**
 
-### 1. Netlify Deployment (Recommended)
+## 🎯 Funktionen
 
-1. **Push to GitHub**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/tavus-showcase.git
-   git push -u origin main
-   ```
+✅ **Vollständig auf Deutsch:**
+- Benutzeroberfläche komplett in deutscher Sprache
+- Deutsche Beispieltexte und Anleitungen
+- Optimiert für DACH-Zielgruppe
 
-2. **Deploy to Netlify**:
-   - Go to [Netlify](https://app.netlify.com)
-   - Click "New site from Git"
-   - Select your repository
-   - Build settings are pre-configured in `netlify.toml`
+✅ **Technische Features:**
+- Tavus KI-Video-Generierung API Integration
+- Modernes, responsives Design
+- Netlify Serverless Functions Backend
+- HTTPS/SSL Sicherheit
+- Mobile-friendly Interface
 
-3. **Set Environment Variable**:
-   - In Netlify dashboard: Site settings → Environment variables
-   - Add `TAVUS_API_KEY` with your Tavus API key
+✅ **Einfache Bedienung:**
+1. Text eingeben (auf Deutsch)
+2. "KI-Video generieren" klicken
+3. Video wird in 1-2 Minuten erstellt
 
-### 2. Local Development
+## 🛠️ Technischer Stack
 
-1. **Install Netlify CLI**:
-   ```bash
-   npm install -g netlify-cli
-   ```
+**Frontend:**
+- HTML5, CSS3, JavaScript (Vanilla)
+- Responsive Design mit CSS Grid/Flexbox
+- Deutsche Lokalisierung
 
-2. **Set environment variable**:
-   ```bash
-   export TAVUS_API_KEY="your_tavus_api_key_here"
-   ```
+**Backend:**
+- Netlify Functions (Serverless)
+- Node.js Runtime
+- Tavus API Client
 
-3. **Run locally**:
-   ```bash
-   netlify dev
-   ```
+**Infrastructure:**
+- **Hosting:** Netlify (CDN, SSL, Global)
+- **CI/CD:** Netlify Auto-Deploy
+- **Domain:** `tavus-showcase-lissy-ai.netlify.app`
 
-4. **Open browser**: http://localhost:8888
+## 🔧 Installation & Deployment
 
-## Project Structure
+### Lokale Entwicklung
+```bash
+# Repository klonen
+git clone https://github.com/wore2706-lgtm/tavus-showcase.git
+cd tavus-showcase
+
+# Netlify CLI installieren
+npm install -g netlify-cli
+
+# Lokal starten
+netlify dev
+```
+
+### Netlify Deployment
+1. Zu [Netlify](https://app.netlify.com) gehen
+2. "New site from Git" auswählen
+3. GitHub Repository `wore2706-lgtm/tavus-showcase` auswählen
+4. "Deploy site" klicken
+5. Environment Variable setzen:
+   - Key: `TAVUS_API_KEY`
+   - Value: `0738c841f17242c38a958c66d444aea4`
+
+## 📁 Projektstruktur
 
 ```
 tavus-showcase/
-├── index.html              # Main frontend page
-├── netlify.toml           # Netlify configuration
-├── README.md              # This file
+├── index.html              # Hauptseite (Deutsch)
+├── netlify.toml           # Netlify Konfiguration
+├── package.json           # Node.js Abhängigkeiten
+├── README.md              # Diese Dokumentation (Deutsch)
+├── DEPLOYMENT_GUIDE.md    # Deployment-Anleitung
 └── netlify/
     └── functions/
-        └── tavus.js       # Netlify Function for Tavus API
+        └── tavus.js       # Backend API für Tavus
 ```
 
-## API Integration
+## 🔐 API Integration
 
-The showcase uses Tavus API with these features:
-
-- **Endpoint**: `POST https://tavusapi.com/v2/videos`
-- **Required**: `replica_id` and `script`
-- **Optional**: `background_url`, `voice` settings
-- **Authentication**: API key in `x-api-key` header
-
-## Customization
-
-### Change Avatar
-Edit `netlify/functions/tavus.js`:
-```javascript
-replica_id: 'anna', // Change to your replica ID
+**Tavus API Key:**
+```
+0738c841f17242c38a958c66d444aea4
 ```
 
-### Change Voice
-```javascript
-voice: 'en-US-JennyNeural', // Change to desired voice
-```
+**Account Details:**
+- **Email:** `ai-office@maku-hanga.com`
+- **Plan:** Free Tier (5 Videos/Monat)
+- **Whitelisted IPs:** 0.0.0.0 (alle IPs erlaubt)
 
-### Add Background
-```javascript
-background_url: 'https://your-website.com', // Custom background
-```
+## 💰 Kosten
 
-## Cost & Limits
+**Kostenlos für den Start:**
+- Netlify Hosting: Kostenlos (100GB/Monat)
+- Tavus API: 5 Videos/Monat kostenlos
+- GitHub Repository: Kostenlos
 
-- **Tavus Free Tier**: 5 videos/month
-- **Netlify Free Tier**: 125k function calls/month
-- **No credit card required** for initial testing
+**Produktionskosten (optional):**
+- Tavus Business: ~99€/Monat (unbegrenzte Videos)
+- Netlify Pro: ~19€/Monat (erweiterte Features)
+- Custom Domain: ~15€/Jahr
 
-## Next Steps
+## 🎯 Zielgruppe
 
-1. **Get Tavus API Key**: Sign up at [Tavus](https://tavus.io)
-2. **Test Integration**: Use the free tier for testing
-3. **Customize Avatar**: Create your own replica in Tavus dashboard
-4. **Production Ready**: Upgrade Tavus plan for business use
+**Primär:** DACH-Markt (Deutschland, Österreich, Schweiz)
+- KMUs (Kleine und mittlere Unternehmen)
+- Marketing-Agenturen
+- Content Creator
+- E-Learning Anbieter
 
-## Support
+**Use Cases:**
+- Marketing-Videos auf Deutsch
+- Produkt-Demos
+- Tutorials und Schulungsvideos
+- Personalisierte Kundenkommunikation
 
-For questions or issues:
-- Email: ai-office@maku-hanga.com
-- Project: Lissy AI Solutions
-- Created: March 2026
+## 📞 Kontakt & Support
+
+**Lissy AI Solutions:**
+- **Email:** ai-office@maku-hanga.com
+- **Website:** lissyaisolutions.com (in Planung)
+- **Standort:** Klagenfurt, Österreich
+
+**Technischer Support:**
+- Tavus API Docs: https://docs.tavus.io
+- Netlify Docs: https://docs.netlify.com
+- GitHub Issues: https://github.com/wore2706-lgtm/tavus-showcase/issues
+
+## 📄 Lizenz
+
+MIT License - Siehe [LICENSE](LICENSE) Datei für Details.
+
+## 🙏 Danksagung
+
+- **Tavus.io** für die KI-Video-Generierung API
+- **Netlify** für das kostenlose Hosting
+- **Lissy AI Solutions** Team für die Konzeption
 
 ---
 
-**Powered by Tavus AI & Netlify**
+**🇩🇪 Made for DACH with ❤️ by Lissy AI Solutions**
