@@ -10,6 +10,17 @@
   to = "/index.html"
   status = 200
 
+# API routes for Tavus functions
+[[redirects]]
+  from = "/api/tavus"
+  to = "/.netlify/functions/tavus"
+  status = 200
+
+[[redirects]]
+  from = "/api/video-status"
+  to = "/.netlify/functions/video-status"
+  status = 200
+
 # Security headers
 [[headers]]
   for = "/*"

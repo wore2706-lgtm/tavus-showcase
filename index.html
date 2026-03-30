@@ -336,12 +336,12 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://raw.githubusercontent.com/wore2706-lgtm/lizzy-marketing-automation/main/business/maku-hanga-website/img/avatars/lizzy_avatar.jpg" 
-                     alt="Lizzy AI Avatar - Professionelle KI-Video-Agentur"
+                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
+                     alt="Lizzy AI Solutions - Professionelle KI-Video-Agentur"
                      width="600"
                      height="400"
                      loading="eager"
-                     onerror="this.src='https://via.placeholder.com/600x400/0a2463/ffffff?text=Lizzy+AI+Avatar'">
+                     onerror="this.src='https://via.placeholder.com/600x400/0a2463/ffffff?text=Lizzy+AI+Solutions+Avatar'">
             </div>
         </div>
     </section>
@@ -510,7 +510,7 @@
             // Check video status
             async function checkVideoStatus(videoId) {
                 try {
-                    const response = await fetch(`/.netlify/functions/video-status?videoId=${videoId}`);
+                    const response = await fetch(`/api/video-status?videoId=${videoId}`);
                     const data = await response.json();
                     
                     if (data.success) {
@@ -606,13 +606,19 @@
 
                 try {
                     // Call Tavus API
-                    const response = await fetch('/.netlify/functions/tavus', {
+                    updateStatus('🔄 Verbindung zu Tavus API...', 'info');
+                    const response = await fetch('/api/tavus', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ text })
                     });
 
                     const data = await response.json();
+                    console.log('Tavus API Response:', data);
+
+                    if (!response.ok) {
+                        throw new Error(`API Error ${response.status}: ${data.error || 'Unknown error'}`);
+                    }
 
                     if (data.success) {
                         currentVideoId = data.videoId;
@@ -636,6 +642,14 @@
                 } catch (error) {
                     console.error('Generation error:', error);
                     updateStatus(`❌ Fehler: ${error.message}`, 'error');
+                    
+                    // Show debug info in console
+                    console.debug('Debug Info:', {
+                        textLength: text.length,
+                        timestamp: new Date().toISOString(),
+                        userAgent: navigator.userAgent
+                    });
+                    
                     generateBtn.disabled = false;
                     generateBtn.textContent = 'KI-Video generieren';
                     clearInterval(progressInterval);
