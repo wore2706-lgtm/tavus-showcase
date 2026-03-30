@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lizzy AI Solutions - Tavus Showcase</title>
+    <title>Lizzy AI Solutions - Tavus KI-Video Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,231 +15,480 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1a1a2e;
+            line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
         }
 
-        .container {
-            max-width: 800px;
+        /* Header & Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0a2463 0%, #071A47 100%);
+            color: white;
+            padding: 4rem 2rem 6rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
+        .hero-text {
+            z-index: 2;
         }
 
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
-        .tagline {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: 1.3rem;
             opacity: 0.9;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
+            max-width: 600px;
         }
 
-        .showcase-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+        .hero-image {
+            position: relative;
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.1);
         }
 
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Showcase Card */
+        .showcase-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(10, 36, 99, 0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 3rem;
+            position: relative;
+            top: -50px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: #0a2463;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Input Section */
         .input-section {
-            margin-bottom: 30px;
+            margin-bottom: 2.5rem;
         }
 
         .input-label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0a2463;
+            margin-bottom: 1rem;
         }
 
         .text-input {
             width: 100%;
-            min-height: 150px;
-            padding: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 16px;
+            min-height: 180px;
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            color: #1a1a2e;
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
             resize: vertical;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .text-input:focus {
             outline: none;
-            border-color: #4ecdc4;
+            border-color: #0a2463;
+            box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+            background: white;
         }
 
         .text-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            color: #94a3b8;
         }
 
-        .generate-btn {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: 600;
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border: none;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: block;
-            margin: 0 auto;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: 'DM Sans', sans-serif;
         }
 
-        .generate-btn:hover {
+        .btn-primary {
+            background: linear-gradient(135deg, #0a2463 0%, #0D2F7A 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(10, 36, 99, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #071A47 0%, #0a2463 100%);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(10, 36, 99, 0.3);
         }
 
-        .generate-btn:disabled {
+        .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
-        .video-section {
-            margin-top: 40px;
-            text-align: center;
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff7b00 0%, #ff9500 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 123, 0, 0.2);
         }
 
-        .video-placeholder {
-            width: 100%;
-            max-width: 600px;
-            height: 338px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            overflow: hidden;
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #cc6200 0%, #ff7b00 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 123, 0, 0.3);
         }
 
-        .video-placeholder video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .btn-center {
+            display: block;
+            margin: 0 auto;
         }
 
+        /* Status Messages */
         .status-message {
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
             text-align: center;
             font-weight: 500;
+            border: 2px solid transparent;
         }
 
         .status-success {
-            background: rgba(46, 204, 113, 0.2);
-            border: 1px solid rgba(46, 204, 113, 0.5);
+            background: rgba(46, 204, 113, 0.1);
+            border-color: rgba(46, 204, 113, 0.3);
+            color: #10b981;
         }
 
         .status-error {
-            background: rgba(231, 76, 60, 0.2);
-            border: 1px solid rgba(231, 76, 60, 0.5);
+            background: rgba(231, 76, 60, 0.1);
+            border-color: rgba(231, 76, 60, 0.3);
+            color: #ef4444;
         }
 
         .status-info {
-            background: rgba(52, 152, 219, 0.2);
-            border: 1px solid rgba(52, 152, 219, 0.5);
+            background: rgba(10, 36, 99, 0.1);
+            border-color: rgba(10, 36, 99, 0.3);
+            color: #0a2463;
         }
 
+        .status-warning {
+            background: rgba(255, 123, 0, 0.1);
+            border-color: rgba(255, 123, 0, 0.3);
+            color: #ff7b00;
+        }
+
+        /* Loading Animation */
         .loading {
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            border: 3px solid rgba(10, 36, 99, 0.3);
             border-radius: 50%;
-            border-top-color: white;
+            border-top-color: #0a2463;
             animation: spin 1s ease-in-out infinite;
             margin-right: 10px;
+            vertical-align: middle;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        .instructions {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
+        /* Video Section */
+        .video-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f8fafc;
+            border-radius: 15px;
+            border: 2px dashed #e2e8f0;
+            padding: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder.has-video {
+            border-color: #0a2463;
+            background: white;
+            padding: 2rem;
+        }
+
+        .video-placeholder video {
+            width: 100%;
             border-radius: 10px;
-            margin-top: 30px;
-            font-size: 0.9rem;
-            line-height: 1.6;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Instructions */
+        .instructions {
+            background: #f8fafc;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-top: 3rem;
+            border-left: 4px solid #0a2463;
         }
 
         .instructions h3 {
-            margin-bottom: 10px;
-            color: #4ecdc4;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #0a2463;
+            margin-bottom: 1.5rem;
         }
 
         .instructions ul {
-            padding-left: 20px;
-            margin: 10px 0;
+            list-style: none;
+            padding: 0;
         }
 
         .instructions li {
-            margin-bottom: 5px;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
+        .instructions li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .instructions li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
         .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            opacity: 0.7;
+            background: #0a2463;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-radius: 30px 30px 0 0;
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px 10px;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #ff7b00;
+        }
+
+        .footer-section p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 1.5rem 4rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
             }
             
             .showcase-card {
-                padding: 20px;
+                padding: 2rem;
+                top: -30px;
             }
             
-            .logo {
+            .section-title {
                 font-size: 2rem;
             }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 2rem 1rem 3rem;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .showcase-card {
+                padding: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 2rem;
+                width: 100%;
+            }
+            
+            .video-placeholder {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Video Controls */
+        .video-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .video-info {
+            background: rgba(10, 36, 99, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .video-info strong {
+            color: #0a2463;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">Lizzy AI Solutions</div>
-            <div class="tagline">Tavus KI-Video-Generierung Showcase</div>
+    <!-- Hero Section with Lizzy Avatar -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Lizzy AI Solutions</h1>
+                <p class="hero-subtitle">
+                    Tavus KI-Video-Generierung Showcase – Erleben Sie die Zukunft der Video-Produktion mit KI-Avataren
+                </p>
+                <div style="margin-top: 2rem;">
+                    <a href="#showcase" class="btn btn-secondary" style="margin-right: 1rem;">
+                        Demo testen
+                    </a>
+                    <a href="#instructions" class="btn" style="background: rgba(255, 255, 255, 0.1); color: white; border: 2px solid rgba(255, 255, 255, 0.3);">
+                        Mehr erfahren
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://raw.githubusercontent.com/wore2706-lgtm/lizzy-marketing-automation/main/business/maku-hanga-website/img/avatars/lizzy_avatar.jpg" 
+                     alt="Lizzy AI Avatar - Professionelle KI-Video-Agentur"
+                     onerror="this.src='https://via.placeholder.com/600x400/0a2463/ffffff?text=Lizzy+AI+Avatar'">
+            </div>
         </div>
+    </section>
 
-        <div class="showcase-card">
+    <!-- Main Showcase Section -->
+    <div class="container">
+        <div class="showcase-card" id="showcase">
+            <h2 class="section-title">KI-Video-Generierung Live Demo</h2>
+            
             <div class="input-section">
                 <label class="input-label">Text für KI-Video-Generierung eingeben:</label>
                 <textarea 
                     class="text-input" 
-                    placeholder="Geben Sie hier Ihren Text ein... Beispiel: 'Hallo! Willkommen bei Lizzy AI Solutions. Wir erstellen KI-generierte Videoinhalte für Unternehmen.'"
+                    placeholder="Geben Sie hier Ihren Text ein... Beispiel: 'Hallo! Willkommen bei Lizzy AI Solutions. Wir erstellen KI-generierte Videoinhalte für Unternehmen im DACH-Markt. Testen Sie unsere Tavus-Technologie!'"
                     id="textInput"></textarea>
             </div>
 
-            <button class="generate-btn" id="generateBtn">
+            <button class="btn btn-primary btn-center" id="generateBtn">
                 KI-Video generieren
             </button>
 
@@ -244,34 +496,69 @@
 
             <div class="video-section">
                 <div class="video-placeholder" id="videoPlaceholder">
-                    <div style="text-align: center; padding: 40px;">
-                    <div style="font-size: 48px; margin-bottom: 20px;">🎬</div>
-                    <div>Ihr generiertes Video erscheint hier</div>
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem; color: #0a2463;">🎬</div>
+                        <h3 style="color: #0a2463; margin-bottom: 1rem;">Ihr generiertes Video erscheint hier</h3>
+                        <p style="color: #64748b; max-width: 500px; margin: 0 auto;">
+                            Nach der Generierung sehen Sie hier Ihr KI-Video mit einem realistischen Avatar
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div class="instructions">
+            <div class="instructions" id="instructions">
                 <h3>So funktioniert's:</h3>
                 <ul>
-                    <li>Geben Sie beliebigen Text in das Feld oben ein</li>
+                    <li>Geben Sie beliebigen Text in das Feld oben ein (deutsch oder englisch)</li>
                     <li>Klicken Sie auf "KI-Video generieren"</li>
-                    <li>Unsere KI erstellt ein realistisches Video mit einem Avatar, der Ihren Text spricht</li>
-                    <li>Die Video-Generierung dauert 1-2 Minuten</li>
-                    <li>Perfekt für Marketing-Videos, Tutorials und Präsentationen</li>
+                    <li>Unsere KI erstellt ein realistisches Video mit dem Avatar "Anna - Professional"</li>
+                    <li>Die Video-Generierung dauert 1-2 Minuten (bitte etwas Geduld)</li>
+                    <li>Perfekt für Marketing-Videos, Tutorials, Schulungen und Präsentationen</li>
+                    <li>Direkter Download und Wiedergabe im Browser möglich</li>
                 </ul>
-                <p><strong>Powered by Tavus AI</strong> - Modernste Video-Generierungstechnologie</p>
-                <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.8;">
-                    <strong>Hinweis:</strong> Video-Generierung dauert 1-2 Minuten. Nach erfolgreicher Generierung können Sie das Video direkt ansehen.
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(10, 36, 99, 0.05); border-radius: 10px;">
+                    <p style="margin-bottom: 0.5rem;"><strong>Powered by Tavus AI</strong> – Modernste Video-Generierungstechnologie</p>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">
+                        <strong>Hinweis:</strong> Die Demo verwendet den Free-Tier von Tavus (5 Videos/Monat). Für Produktionsnutzung kontaktieren Sie uns.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">Lizzy AI Solutions</div>
+                <p>Professionelle KI-Video-Agentur für den DACH-Markt. Tavus Showcase für moderne Video-Generierung.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <p>
+                    <strong>Email:</strong> ai-office@maku-hanga.com<br>
+                    <strong>Website:</strong> maku-hanga.com<br>
+                    <strong>Projekt:</strong> Lizzy AI Solutions
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Technologie</h4>
+                <p>
+                    Tavus API v2<br>
+                    KI-Avatar Generierung<br>
+                    Realistische Video-Synthese<br>
+                    DACH-Markt optimiert
                 </p>
             </div>
         </div>
-
-        <div class="footer">
-            <p>© 2026 Lizzy AI Solutions | KI-Video-Agentur | Tavus API Integration</p>
-            <p>Dies ist ein technischer Showcase. Für Produktionsnutzung kontaktieren Sie uns unter ai-office@maku-hanga.com</p>
+        
+        <div class="footer-bottom">
+            <p>© 2026 Lizzy AI Solutions | Teil von Maku Hanga Agentur | Tavus API Integration Showcase</p>
+            <p style="margin-top: 0.5rem;">Diese Demo zeigt die Möglichkeiten moderner KI-Video-Generierung für Unternehmen.</p>
         </div>
-    </div>
+    </footer>
 
     <script>
         const generateBtn = document.getElementById('generateBtn');
@@ -280,7 +567,7 @@
         const videoPlaceholder = document.getElementById('videoPlaceholder');
 
         // Beispieltext für schnelles Testen
-        const exampleText = "Hallo! Ich bin Lizzy von Lizzy AI Solutions. Wir erstellen KI-generierte Videoinhalte für Unternehmen. Mit Tavus können wir realistische Avatare erstellen, die Ihre Botschaft authentisch vermitteln. Testen Sie unseren Showcase!";
+        const exampleText = "Hallo! Ich bin Lizzy von Lizzy AI Solutions. Wir erstellen KI-generierte Videoinhalte für Unternehmen im DACH-Markt. Mit Tavus können wir realistische Avatare erstellen, die Ihre Botschaft authentisch vermitteln. Testen Sie unseren Showcase und erleben Sie die Zukunft der Video-Produktion!";
         textInput.value = exampleText;
 
         generateBtn.addEventListener('click', async () => {
@@ -293,9 +580,9 @@
 
             // Button deaktivieren und Ladeanimation anzeigen
             generateBtn.disabled = true;
-            generateBtn.innerHTML = '<span class="loading"></span>Generiere...';
+            generateBtn.innerHTML = '<span class="loading"></span>Generiere Video...';
             
-            showStatus('Starte Video-Generierung...', 'info');
+            showStatus('Starte KI-Video-Generierung...', 'info');
 
             try {
                 const response = await fetch('/.netlify/functions/tavus', {
@@ -312,18 +599,18 @@
                     throw new Error(data.error || 'Video-Generierung fehlgeschlagen');
                 }
 
-                showStatus('Video-Generierung erfolgreich gestartet! Die Verarbeitung kann 1-2 Minuten dauern.', 'success');
+                showStatus('✅ Video-Generierung erfolgreich gestartet! Die Verarbeitung kann 1-2 Minuten dauern.', 'success');
                 
                 // Start polling for video status
                 if (data.videoId) {
                     startVideoPolling(data.videoId);
                 } else {
-                    showStatus('Video-Generierung gestartet, aber keine Video-ID erhalten.', 'info');
+                    showStatus('Video-Generierung gestartet, aber keine Video-ID erhalten.', 'warning');
                 }
 
             } catch (error) {
                 console.error('Fehler:', error);
-                showStatus(`Fehler: ${error.message}`, 'error');
+                showStatus(`❌ Fehler: ${error.message}`, 'error');
             } finally {
                 // Button wieder aktivieren
                 generateBtn.disabled = false;
@@ -353,27 +640,27 @@
                 attempts++;
                 
                 try {
-                    showStatus(`Prüfe Video-Status... (Versuch ${attempts}/${maxAttempts})`, 'info');
+                    showStatus(`⏳ Prüfe Video-Status... (${attempts}/${maxAttempts})`, 'info');
                     
                     const response = await fetch(`/.netlify/functions/video-status?videoId=${videoId}`);
                     const data = await response.json();
                     
                     if (data.status === 'completed') {
                         clearInterval(pollInterval);
-                        showStatus('Video erfolgreich generiert! Lade Video...', 'success');
+                        showStatus('✅ Video erfolgreich generiert! Lade Video...', 'success');
                         displayVideo(data.videoUrl, videoId);
                     } else if (data.status === 'failed') {
                         clearInterval(pollInterval);
-                        showStatus('Video-Generierung fehlgeschlagen.', 'error');
+                        showStatus('❌ Video-Generierung fehlgeschlagen.', 'error');
                     } else if (attempts >= maxAttempts) {
                         clearInterval(pollInterval);
-                        showStatus('Timeout: Video-Generierung dauert zu lange. Bitte später erneut versuchen.', 'info');
+                        showStatus('⏰ Timeout: Video-Generierung dauert zu lange. Bitte später erneut versuchen.', 'warning');
                     }
                 } catch (error) {
                     console.error('Polling error:', error);
                     if (attempts >= maxAttempts) {
                         clearInterval(pollInterval);
-                        showStatus('Fehler beim Abrufen des Video-Status.', 'error');
+                        showStatus('❌ Fehler beim Abrufen des Video-Status.', 'error');
                     }
                 }
             }, 5000); // Poll every 5 seconds
@@ -381,37 +668,76 @@
 
         // Display video when ready
         function displayVideo(videoUrl, videoId) {
+            videoPlaceholder.classList.add('has-video');
             videoPlaceholder.innerHTML = `
-                <div style="width: 100%; max-width: 600px; margin: 0 auto;">
-                    <h3 style="margin-bottom: 15px; color: #4ecdc4;">✅ Video erfolgreich generiert!</h3>
-                    <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <div style="width: 100%; max-width: 800px; margin: 0 auto;">
+                    <h3 style="margin-bottom: 1rem; color: #0a2463; font-family: 'Cormorant Garamond', serif;">✅ Video erfolgreich generiert!</h3>
+                    
+                    <div class="video-info">
                         <strong>Video-ID:</strong> ${videoId}<br>
-                        <strong>Status:</strong> Fertig zum Ansehen
+                        <strong>Status:</strong> Fertig zum Ansehen & Download<br>
+                        <strong>Technologie:</strong> Tavus AI Avatar Generierung
                     </div>
-                    <video controls style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+                    
+                    <video controls style="width: 100%; border-radius: 10px; margin-bottom: 1.5rem;">
                         <source src="${videoUrl}" type="video/mp4">
                         Ihr Browser unterstützt das Video-Tag nicht.
                     </video>
-                    <div style="display: flex; gap: 10px; justify-content: center;">
-                        <button onclick="window.open('${videoUrl}', '_blank')" style="background: #4ecdc4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                            Video in neuem Tab öffnen
+                    
+                    <div class="video-controls">
+                        <button onclick="window.open('${videoUrl}', '_blank')" class="btn btn-primary">
+                            Video herunterladen
                         </button>
-                        <button onclick="location.reload()" style="background: rgba(255, 255, 255, 0.2); color: white; border: 1px solid rgba(255, 255, 255, 0.3); padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        <button onclick="location.reload()" class="btn" style="background: #f8fafc; color: #0a2463; border: 2px solid #0a2463;">
                             Neues Video erstellen
+                        </button>
+                        <button onclick="shareVideo('${videoId}')" class="btn btn-secondary">
+                            Video teilen
                         </button>
                     </div>
                 </div>
             `;
         }
 
+        // Share function
+        function shareVideo(videoId) {
+            const url = window.location.href;
+            const text = `Schau dir dieses KI-generierte Video an! Generiert mit Lizzy AI Solutions Tavus Showcase. Video-ID: ${videoId}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'KI-Video von Lizzy AI Solutions',
+                    text: text,
+                    url: url
+                });
+            } else {
+                // Fallback: Copy to clipboard
+                navigator.clipboard.writeText(text + '\n' + url).then(() => {
+                    showStatus('✅ Link in Zwischenablage kopiert!', 'success');
+                });
+            }
+        }
+
         // Add some interactive effects
         textInput.addEventListener('focus', () => {
-            textInput.style.borderColor = '#4ecdc4';
+            textInput.style.borderColor = '#0a2463';
+            textInput.style.boxShadow = '0 0 0 3px rgba(10, 36, 99, 0.1)';
         });
 
         textInput.addEventListener('blur', () => {
-            textInput.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            textInput.style.borderColor = '#e2e8f0';
+            textInput.style.boxShadow = 'none';
         });
+
+        // Auto-resize textarea
+        textInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        // Initialize textarea height
+        textInput.style.height = 'auto';
+        textInput.style.height = (textInput.scrollHeight) + 'px';
     </script>
 </body>
 </html>
