@@ -27,8 +27,8 @@ export async function handler(event) {
       body: JSON.stringify({
         replica_id: 'anna', // Default replica
         script: text,
-        background_url: 'https://lissyaisolutions.com', // Optional background
-        voice: 'en-US-JennyNeural' // English voice
+        video_name: `Lissy AI Video - ${Date.now()}`,
+        background_url: 'https://lissyaisolutions.com' // Optional background
       })
     });
 
